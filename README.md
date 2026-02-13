@@ -83,6 +83,21 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+### 4. Download the Trained Model
+
+The trained model (268MB) is stored using Git LFS. Download it with:
+
+```bash
+git lfs pull
+```
+
+> **Note:** If you don't have Git LFS installed, install it first:
+> - **Windows:** `winget install GitHub.GitLFS` or download from [git-lfs.github.com](https://git-lfs.github.com/)
+> - **Linux:** `sudo apt-get install git-lfs`
+> - **Mac:** `brew install git-lfs`
+
+After installation, run `git lfs pull` to download the model file.
+
 ## 📥 Download Dataset
 
 ### Option 1: Using Kaggle API (Recommended)
