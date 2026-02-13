@@ -44,9 +44,8 @@ data/News_Category_Dataset_v3.json
 data/*.json
 data/*.csv
 
-# Model files (too large for git)
+# Model files (checkpoints are too large, but keep final model)
 models/*.bin
-models/*.safetensors
 models/checkpoint-*/
 
 # Jupyter Notebook
