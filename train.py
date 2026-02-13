@@ -90,7 +90,9 @@ def train_model(
     max_length=128,
     save_steps=1000,
     eval_steps=500,
-    warmup_steps=500
+    warmup_steps=500,
+    max_train_samples=None,
+    max_val_samples=None
 ):
     """
     Train the news classification model.
@@ -114,6 +116,15 @@ def train_model(
     # Load and prepare data
     print("\n[1/6] Loading dataset...")
     train_df, val_df, label_encoder, num_classes = load_dataset(data_path)
+    
+    # Limit dataset size if specified (for faster CPU training)
+    if max_train_samples and len(train_df) > max_train_samples:
+        print(f"  Limiting training set to {max_train_samples} samples (from {len(train_df)})")
+        train_df = train_df.sample(n=max_train_samples, random_state=42).reset_index(drop=True)
+    
+    if max_val_samples and len(val_df) > max_val_samples:
+        print(f"  Limiting validation set to {max_val_samples} samples (from {len(val_df)})")
+        val_df = val_df.sample(n=max_val_samples, random_state=42).reset_index(drop=True)
     
     # Initialize tokenizer
     print(f"\n[2/6] Loading tokenizer: {model_name}")
@@ -291,6 +302,10 @@ def main():
                         help='Learning rate')
     parser.add_argument('--max_length', type=int, default=128,
                         help='Maximum sequence length')
+    parser.add_argument('--max_train_samples', type=int, default=None,
+                        help='Maximum training samples (for faster CPU training)')
+    parser.add_argument('--max_val_samples', type=int, default=None,
+                        help='Maximum validation samples')
     
     args = parser.parse_args()
     
@@ -301,7 +316,9 @@ def main():
         epochs=args.epochs,
         batch_size=args.batch_size,
         learning_rate=args.learning_rate,
-        max_length=args.max_length
+        max_length=args.max_length,
+        max_train_samples=args.max_train_samples,
+        max_val_samples=args.max_val_samples
     )
 
 

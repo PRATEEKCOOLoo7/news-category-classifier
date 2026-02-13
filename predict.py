@@ -66,8 +66,8 @@ class NewsPredictor:
             return_tensors='pt'
         )
         
-        # Move to device
-        inputs = {k: v.to(self.device) for k, v in inputs.items()}
+        # Move to device and remove token_type_ids (DistilBERT doesn't use them)
+        inputs = {k: v.to(self.device) for k, v in inputs.items() if k != 'token_type_ids'}
         
         # Predict
         with torch.no_grad():
