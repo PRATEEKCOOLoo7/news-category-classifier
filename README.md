@@ -299,11 +299,7 @@ All experiments are reproducible with:
 - Deterministic training configuration
 - Saved model checkpoints and configurations
 
-## 📜 License
-
-This project is licensed under the MIT License.
-
-## 👨‍💻 Author
+## 👨‍💻 Author -- Prateek Srivastava
 
 Created as part of a machine learning assessment demonstrating:
 - Production-ready ML code development
